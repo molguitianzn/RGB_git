@@ -142,6 +142,17 @@ def my_fun(img, x):
     return
 
 
+def write_data1_cfg(x):
+    # y = ['threshold_canny_1 = ', 'threshold_canny_2 = ', 'Sobel = ', 'rho_hough = ', 'theta = ', 'threshold_hough = ']
+    f1 = open('para.cfg', 'w')
+    for i in range(6):
+        # f1.write(y[i])
+        f1.write(str(x[i]))
+        f1.write('\n')
+    f1.close()
+    return
+
+
 class Ui_Form(object):
     """
     def setupUi(self, Form):
@@ -355,15 +366,23 @@ class Ui_Form(object):
     def setting_2(self):
         ca = np.zeros((3, 1))
         ho = np.zeros((3, 1))
+        x = [0, 0, 0, 0, 0, 0]
         # ca = (100, 150, 3)
         # ho = (1, np.pi / 180, 80)
         ca[0] = self.lineEdit_3.text()
+        x[0] = int(ca[0])
         ca[1] = self.lineEdit_12.text()
+        x[1] = int(ca[1])
         ca[2] = self.lineEdit_11.text()
+        x[2] = int(ca[2])
         ho[0] = self.lineEdit_2.text()
+        x[3] = int(ho[0])
         ho1 = self.lineEdit_9.text()
         ho[1] = int(ho1) * math.pi/180
+        x[4] = int(ho1)
         ho[2] = self.lineEdit_10.text()
+        x[5] = int(ho[2])
+        write_data1_cfg(x)              #   输出顺序为:threshold_canny_1, threshold_canny_2, Sobel, rho_hough, theta, threshold_hough
         corner.fun_corner(ca, ho)
 
 '''
